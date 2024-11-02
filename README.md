@@ -21,8 +21,8 @@ This project is a simple Hall Booking API built with Node.js and Express, featur
 1. Clone the repository:
 
     ```bash
-    git clone <repository-url>
-    cd hall-booking-api
+    git clone https://github.com/dhatchan96/node-hallbook-api
+    cd node-hallbook-api
     ```
 
 2. Install dependencies:

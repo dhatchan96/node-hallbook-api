@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "79796da7-5213-4d10-bb9b-88bb234997f7",
+		"name": "Hall Book APi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39256239"
+	},
+	"item": [
+		{
+			"name": "Create Room",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Conference Room A\",\r\n  \"numberOfSeats\": 50,\r\n  \"amenities\": [\"Projector\", \"Whiteboard\"],\r\n  \"pricePerHour\": 200\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/rooms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rooms"
+					]
+				},
+				"description": "### Create a New Room\n\nThis endpoint allows you to create a new room with the specified details.\n\n#### Request Body\n\n- name (string, required): The name of the room.\n    \n- numberOfSeats (integer, required): The number of seats available in the room.\n    \n- amenities (array of strings, required): The list of amenities available in the room.\n    \n- pricePerHour (number, required): The price per hour for booking the room.\n    \n\n#### Response (JSON Schema)\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"id\": {\n            \"type\": \"integer\"\n        },\n        \"name\": {\n            \"type\": \"string\"\n        },\n        \"numberOfSeats\": {\n            \"type\": \"integer\"\n        },\n        \"amenities\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"string\"\n            }\n        },\n        \"pricePerHour\": {\n            \"type\": \"number\"\n        }\n    }\n}\n\n ```\n\nThis endpoint allows you to create a new room with the specified details.\n\n#### Request Body\n\n- `name`: (string) The name of the room, e.g. \"Conference Room A\"\n    \n- `numberOfSeats`: (number) The number of seats available in the room, e.g. 50\n    \n- `amenities`: (array) An array of amenities available in the room, e.g. \\[\"Projector\"\\]\n    \n- `pricePerHour`: (number) The price per hour for the room, e.g. 200\n    \n\n#### Response\n\nUpon successful creation, the endpoint returns the following response:\n\n- Status: 201 Created\n    \n- Content-Type: application/json\n    \n- `id`: (number) The unique identifier for the created room\n    \n- `name`: (string) The name of the room\n    \n- `numberOfSeats`: (number) The number of seats in the room\n    \n- `amenities`: (array) An array of amenities available in the room\n    \n- `pricePerHour`: (number) The price per hour for the room"
+			},
+			"response": []
+		},
+		{
+			"name": "Book a Room",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerName\": \"John Doe\",\r\n  \"date\": \"2024-11-10\",\r\n  \"startTime\": \"10:00\",\r\n  \"endTime\": \"12:00\",\r\n  \"roomId\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings"
+					]
+				},
+				"description": "This HTTP POST request is used to create a new booking. The request should include the customer's name, booking date, start time, end time, and the room ID. The request body should be in JSON format with the following parameters:\n\n- customerName (string): The name of the customer making the booking.\n    \n- date (string): The date of the booking in the format YYYY-MM-DD.\n    \n- startTime (string): The start time of the booking.\n    \n- endTime (string): The end time of the booking.\n    \n- roomId (number): The ID of the room being booked.\n    \n\n### Request Body Example\n\n``` json\n{\n  \"customerName\": \"John Doe\",\n  \"date\": \"2024-11-10\",\n  \"startTime\": \"10:00\",\n  \"endTime\": \"12:00\",\n  \"roomId\": 1\n}\n\n ```\n\nThe response to this request will have a status code of 400 and a content type of application/json. The response body will contain a message indicating the reason for the failure.\n\n### Response Body Example\n\n``` json\n{\n  \"message\": \"\"\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "List All Rooms with Booking Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/rooms/booked",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rooms",
+						"booked"
+					]
+				},
+				"description": "The endpoint retrieves a list of booked rooms. The response is in JSON format and follows the schema below:\n\n``` json\n[\n  {\n    \"id\": 0,\n    \"name\": \"\",\n    \"numberOfSeats\": 0,\n    \"amenities\": [\"\"],\n    \"pricePerHour\": 0,\n    \"bookings\": [\n      {\n        \"id\": 0,\n        \"customerName\": \"\",\n        \"date\": \"\",\n        \"startTime\": \"\",\n        \"endTime\": \"\",\n        \"roomId\": 0,\n        \"status\": \"\"\n      }\n    ]\n  }\n]\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "List Booking History for a Specific Customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/bookings/customers/John Doe/history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"customers",
+						"John Doe",
+						"history"
+					]
+				},
+				"description": "The endpoint retrieves the booking history for a specific customer named \"John Doe\".\n\n### Response\n\nThe response is in JSON format and has the following schema:\n\n``` json\n[\n  {\n    \"id\": \"number\",\n    \"customerName\": \"string\",\n    \"date\": \"string\",\n    \"startTime\": \"string\",\n    \"endTime\": \"string\",\n    \"roomId\": \"number\",\n    \"status\": \"string\",\n    \"roomName\": \"string\"\n  }\n]\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "List All Customers with Booked Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/bookings/customers/booked",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings",
+						"customers",
+						"booked"
+					]
+				},
+				"description": "This endpoint makes an HTTP GET request to retrieve the list of bookings for customers. The request does not include a request body, and the response is in JSON format with a 200 status code. The response body contains an array of objects, each representing a booking with properties such as id, customerName, date, startTime, endTime, roomId, status, and roomName."
+			},
+			"response": []
+		}
+	]
+}
